@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+
+# Virtual environment
+.env
+
+# Data files
+*.csv
+*.xlsx
+
+# Other
+.DS_Store

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student MarkSheet Analyzer</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="openFile.js" ></script>
+</head>
+<body>
+    <header>
+        <h1>Student MarkSheet Analyzer</h1>
+        <p>An intelligent tool to analyze and evaluate student performance data.</p>
+    </header>
+
+    <main>
+        <section id="selection">
+            <label for="selection_data"><strong>Select file type:</strong></label>
+            <select id="selection_data">
+                <option value="csv">CSV File</option>
+                <option value="excel">Excel File</option>
+            </select>
+        </section>
+
+        <section id="dragelement">
+            <p>Upload your mark sheet by dragging and dropping the file below, or select it manually.</p>
+            <input type="file" id="fileInput" accept=".csv, .xlsx" hidden>
+            <button id="fileButton" type="button">Choose File</button>
+            <div>
+                <img src="balance-sheet.png" alt="Marksheet Visualization" id="balanceSheetImage">
+            </div>
+        </section>
+
+        <section>
+            <button id="submit" type="button">Analyze Marks</button>
+        </section>
+
+        <section id="result" aria-live="polite">
+            <!-- Analysis result will be displayed here -->
+        </section>
+    </main>
+</body>
+</html>

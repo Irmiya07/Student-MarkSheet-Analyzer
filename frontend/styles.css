@@ -1,0 +1,139 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+header{
+    background-color:rgb(26, 161, 146);
+    color:black;
+    padding: 20px 20px 30px 20px;
+    text-align: center;
+    font-size: 1em ;
+    margin: 0 auto;
+    font-weight: bold;
+}
+header,p{
+    font-size: 1em;
+    padding-top: 10px;
+}
+body{
+    font-family: Arial, sans-serif;
+    background-image: linear-gradient(to right, #f0f0f0, #d9d9d9);
+    color: #333;
+}
+main{
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
+}
+#dragelement {
+    border: 3px dashed rgba(0, 0, 0, 0.39);
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+    background-color: #dbd8d8;
+    transition: background-color 0.3s ease;
+    border-radius: 25px;
+
+}
+#dragelement:hover {
+    background-color: whitesmoke;
+}
+img {
+    max-width: 100%;
+    height: 100px;
+    display: block;
+    margin: 20px auto;
+    border-radius: 10px;
+    filter: brightness(100%);
+}
+img:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s  ease-in-out;
+    filter: brightness(120%);
+}
+#selection {
+    margin: 25px;
+    padding: 20px;
+    text-align: center;
+    font: 1.5em sans-serif;
+   
+}
+#selection label {
+    margin-right: 10px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    display: inline-block;
+    
+}
+#selection select {
+    padding: 5px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    font-size: 0.7em;
+}
+#selection select:hover {
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+#fileButton {
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #2dbada;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1em;
+}
+#fileButton:hover {
+    background-color: #1a8f9c;
+}
+#submit {
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #2dda5b;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1em;
+    display: block;
+}
+#submit:hover {
+    background-color: #28a745;
+}
+
+#dragelement.dragover {
+    border-color: #007bff;
+    background-color: #e9f5ff;
+}
+#balanceSheetImage {
+    width: 100px;
+    margin-top: 20px;
+}
+
+
+.result-table {
+    width: 50%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.result-table th, .result-table td {
+    border: 1px solid #007BFF;
+    padding: 8px;
+    text-align: center;
+}
+
+.result-table th {
+    background-color: #007BFF;
+    color: white;
+}
+
+.result-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
