@@ -33,7 +33,7 @@ window.addEventListener('DOMContentLoaded', () => {
         formData.append("file", currentFile);
 
         try {
-            const response = await fetch("http://127.0.0.1:5000/analyze", { method: "POST", body: formData });
+            const response = await fetch("https://student-marksheet-analyzer-1.onrender.com", { method: "POST", body: formData });
             const data = await response.json();
 
             if (data.error) {
