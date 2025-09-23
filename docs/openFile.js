@@ -6,64 +6,82 @@ window.addEventListener('DOMContentLoaded', () => {
   const result = document.getElementById('result');
 
   // Open file dialog
-  fileButton.addEventListener('click', () => fileInput.click());
+  if (fileButton && fileInput) {
+    fileButton.addEventListener('click', () => fileInput.click());
+  }
 
   // Drag & drop
-  dropZone.addEventListener('dragover', (e) => {
-    e.preventDefault();
-    dropZone.classList.add('dragover');
-  });
+  if (dropZone && fileInput) {
+    dropZone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dropZone.classList.add('dragover');
+    });
 
-  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
 
-  dropZone.addEventListener('drop', (e) => {
-    e.preventDefault();
-    dropZone.classList.remove('dragover');
-    const files = e.dataTransfer.files;
-    if (files.length > 0) fileInput.files = files;
-  });
+    dropZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropZone.classList.remove('dragover');
+      const files = e.dataTransfer.files;
+      if (files.length > 0) fileInput.files = files;
+    });
+  }
 
   // Analyze Marks
-  submitBtn.addEventListener('click', async () => {
-    if (!fileInput.files.length) {
-      alert("Please select a file!");
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append("file", fileInput.files[0]);
-
-    // Replace with your Render backend URL
-    const backendUrl = "https://student-marksheet-analyzer.onrender.com/analyze";
-
-    result.innerHTML = "Analyzing...";
-
-    try {
-      const response = await fetch(backendUrl, {
-        method: "POST",
-        body: formData
-      });
-      const data = await response.json();
-
-      if (data.error) {
-        result.innerHTML = `<p style="color:red">${data.error}</p>`;
+  if (submitBtn && fileInput && result) {
+    submitBtn.addEventListener('click', async () => {
+      if (!fileInput.files.length) {
+        alert("Please select a file!");
         return;
       }
 
-      // Display result
-      let html = `<h2>Analysis Result</h2>`;
-      html += `<p><strong>Total Students:</strong> ${data.total_students}</p>`;
-      html += `<p><strong>Topper:</strong> ${data.topper}</p>`;
-      html += `<h3>Average Marks:</h3><ul>`;
-      for (let subject in data.average_marks) {
-        html += `<li>${subject}: ${data.average_marks[subject].toFixed(2)}</li>`;
-      }
-      html += `</ul>`;
-      result.innerHTML = html;
+      const formData = new FormData();
+      formData.append("file", fileInput.files[0]);
 
-    } catch (err) {
-      result.innerHTML = `<p style="color:red">Error connecting to backend.</p>`;
-      console.error(err);
-    }
-  });
+      // Render backend URL
+      const backendUrl = "https://student-marksheet-analyzer.onrender.com/analyze";
+
+      result.innerHTML = "Analyzing...";
+
+      try {
+        const response = await fetch(backendUrl, {
+          method: "POST",
+          body: formData
+        });
+
+        // Check for HTTP errors
+        if (!response.ok) {
+          throw new Error(`HTTP error ${response.status}`);
+        }
+
+        const contentType = response.headers.get("content-type");
+        if (!contentType || !contentType.includes("application/json")) {
+          const text = await response.text();
+          throw new Error(`Expected JSON, got: ${text}`);
+        }
+
+        const data = await response.json();
+
+        if (data.error) {
+          result.innerHTML = `<p style="color:red">${data.error}</p>`;
+          return;
+        }
+
+        // Display result
+        let html = `<h2>Analysis Result</h2>`;
+        html += `<p><strong>Total Students:</strong> ${data.total_students}</p>`;
+        html += `<p><strong>Topper:</strong> ${data.topper}</p>`;
+        html += `<h3>Average Marks:</h3><ul>`;
+        for (let subject in data.average_marks) {
+          html += `<li>${subject}: ${data.average_marks[subject].toFixed(2)}</li>`;
+        }
+        html += `</ul>`;
+        result.innerHTML = html;
+
+      } catch (err) {
+        result.innerHTML = `<p style="color:red">Error connecting to backend.</p>`;
+        console.error("Fetch error:", err);
+      }
+    });
+  }
 });
