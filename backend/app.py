@@ -5,7 +5,7 @@ import os
 
 # WSGI callable for Render
 application = Flask(__name__)
-CORS(application)
+CORS(application, resources={r"/*": {"origins": "*"}})
 
 @application.route("/analyze", methods=["POST"])
 def analyze_marks():
